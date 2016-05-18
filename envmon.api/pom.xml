@@ -9,12 +9,21 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>envmon.api</artifactId>
   <version>1.0.0</version>
-  <packaging>jar</packaging>
+  <packaging>bundle</packaging>
   
   <name>Environment Monitor API</name>
   <description>
     Service contracts to define the roles and responsibilities
     of components in a simple environment monitoring scenario.
   </description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+      </plugin>    
+    </plugins>
+  </build>
 
 </project>
