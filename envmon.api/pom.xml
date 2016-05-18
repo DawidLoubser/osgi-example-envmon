@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <parent>
+    <groupId>consulting.ross.demo.osgi</groupId>
+    <artifactId>osgi-demo</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>envmon.api</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+  
+  <name>Environment Monitor API</name>
+  <description>
+    Service contracts to define the roles and responsibilities
+    of components in a simple environment monitoring scenario.
+  </description>
+
+</project>
