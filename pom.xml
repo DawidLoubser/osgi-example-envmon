@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Maven coordinates for this project -->
+  <groupId>consulting.ross.demo.osgi</groupId>
+  <artifactId>osgi-demo</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <modules>
+  </modules>
+
+  <!-- Standardise config across sub-projects -->
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- Java 8+ -->
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+</project>
