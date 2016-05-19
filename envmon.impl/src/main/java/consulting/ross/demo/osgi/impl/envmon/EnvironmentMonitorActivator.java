@@ -26,6 +26,7 @@ public class EnvironmentMonitorActivator extends DependencyManagerActivator
         Alarm.class,     // Injects into field
         Sensor.class     // Injects into field
         )
+      .stop( "stopMonitoring" )
     );
   }
 }

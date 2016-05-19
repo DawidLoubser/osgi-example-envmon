@@ -16,18 +16,24 @@ public class BasicAlarm implements Alarm
   @Override
   public void activate()
   {
+    // Idempotent
     if ( es == null )
+    {
       es = Executors.newScheduledThreadPool(2);
-    
-    es.scheduleWithFixedDelay( 
-      () -> System.err.println("ALARM!!!!!!"), 
-      1, 1, TimeUnit.SECONDS );
+      es.scheduleWithFixedDelay(
+        () -> System.err.println("** ALARM!!!!!!"),
+        1, 1, TimeUnit.SECONDS);
+    }
   }
 
   @Override
   public void deActivate()
   {
-    es.shutdownNow();
-    es = null;
+    // Idempotent
+    if (es != null && !es.isShutdown())
+    {
+      es.shutdownNow();
+      es = null;
+    }
   }
 }

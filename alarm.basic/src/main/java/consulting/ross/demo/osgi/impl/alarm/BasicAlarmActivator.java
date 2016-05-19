@@ -24,6 +24,8 @@ public class BasicAlarmActivator extends DependencyManagerActivator
         "service.pid", "alarm.basic",
         "vendor", "Ross Consulting"
       )
-      .impl( BasicAlarm.class ));
+      .impl( BasicAlarm.class )
+      .stop( "deActivate" )
+    );
   }
 }
