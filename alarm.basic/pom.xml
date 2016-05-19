@@ -8,7 +8,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>alarm.basic</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <packaging>bundle</packaging>
   
   <name>Alarm (Simple implementation)</name>
@@ -29,6 +29,12 @@
       <artifactId>org.apache.felix.dependencymanager.lambda</artifactId>
       <scope>provided</scope>
     </dependency>
+    <!-- Custom console command (Karaf shell) -->
+    <dependency>
+      <groupId>org.apache.karaf.shell</groupId>
+      <artifactId>org.apache.karaf.shell.console</artifactId>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -44,10 +50,15 @@
               consulting.ross.demo.osgi.envmon; provide:=true,
               org.apache.felix.dm; provide:=false,
               org.apache.felix.dm.lambda; provide:=false,
+              org.apache.karaf.shell.api.action; provide:=false,
+              org.apache.karaf.shell.api.console; provide:=false,
+              org.apache.karaf.shell.support.completers; provide:=false,
+              org.apache.karaf.shell.api.action.lifecycle; provide:=false
             </Import-Package>
             <Bundle-Activator>
               consulting.ross.demo.osgi.impl.alarm.BasicAlarmActivator
             </Bundle-Activator>
+            <Karaf-Commands>*</Karaf-Commands>
           </instructions>
         </configuration>
       </plugin>

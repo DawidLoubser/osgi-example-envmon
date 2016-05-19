@@ -15,6 +15,7 @@ public class BasicAlarmActivator extends DependencyManagerActivator
   @Override
   protected void init(BundleContext ctx, DependencyManager dm) throws Exception
   {
+    // Publish alarm
     component( c -> c
       .provides( Alarm.class,
         // We can publish metadata (properties)
@@ -23,7 +24,6 @@ public class BasicAlarmActivator extends DependencyManagerActivator
         "service.pid", "alarm.basic",
         "vendor", "Ross Consulting"
       )
-      .impl( BasicAlarm.class )
-      .properties());
+      .impl( BasicAlarm.class ));
   }
 }

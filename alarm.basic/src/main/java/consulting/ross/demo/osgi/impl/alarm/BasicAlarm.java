@@ -19,9 +19,9 @@ public class BasicAlarm implements Alarm
     if ( es == null )
       es = Executors.newScheduledThreadPool(2);
     
-    es.schedule( 
-      () -> System.out.println("BEEEEEP!!!!!!"), 
-      1, TimeUnit.SECONDS );
+    es.scheduleWithFixedDelay( 
+      () -> System.err.println("ALARM!!!!!!"), 
+      1, 1, TimeUnit.SECONDS );
   }
 
   @Override
