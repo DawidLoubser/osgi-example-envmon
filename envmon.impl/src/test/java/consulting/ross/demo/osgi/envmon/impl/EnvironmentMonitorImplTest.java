@@ -20,7 +20,7 @@ public class EnvironmentMonitorImplTest
     
     // Configure our test subject for this scenario
     EnvironmentMonitorImpl em = new EnvironmentMonitorImpl();
-    em.maxTemperature = 30;
+    em.maxTemperature = 30.0;
     em.alarm = alarm;
     em.sensor = sensor;
     
@@ -28,7 +28,7 @@ public class EnvironmentMonitorImplTest
     m.checking( new Expectations(){{
       
       oneOf(sensor).measureTemperature();
-      will( returnValue( 25 ));
+      will( returnValue( 25.0 ));
       
       never(alarm);
       
@@ -41,8 +41,8 @@ public class EnvironmentMonitorImplTest
     
     // Are we happy with the output(s)?
     assertFalse(  result.getAlarmWasRaised() );
-    assertEquals( 25, result.getMeasuredAverage(), PREC );
-    assertEquals( 30, result.getMaxAllowed(), PREC );
+    assertEquals( 25.0, result.getMeasuredAverage(), PREC );
+    assertEquals( 30.0, result.getMaxAllowed(), PREC );
     assertEquals( 1,  result.getMeasurements().size() );
   }
   
@@ -55,7 +55,7 @@ public class EnvironmentMonitorImplTest
     
     // Configure our test subject for this scenario
     EnvironmentMonitorImpl em = new EnvironmentMonitorImpl();
-    em.maxTemperature = 20;
+    em.maxTemperature = 20.0;
     em.alarm = alarm;
     em.sensor = sensor;
     
@@ -63,7 +63,7 @@ public class EnvironmentMonitorImplTest
     m.checking( new Expectations(){{
       
       oneOf(sensor).measureTemperature();
-      will( returnValue( 25 ));
+      will( returnValue( 25.0 ));
       
       oneOf(alarm).activate();
     }});
@@ -75,8 +75,8 @@ public class EnvironmentMonitorImplTest
     
     // Are we happy with the output(s)?
     assertTrue(  result.getAlarmWasRaised() );
-    assertEquals( 25, result.getMeasuredAverage(), PREC );
-    assertEquals( 20, result.getMaxAllowed(), PREC );
+    assertEquals( 25.0, result.getMeasuredAverage(), PREC );
+    assertEquals( 20.0, result.getMaxAllowed(), PREC );
     assertEquals( 1,  result.getMeasurements().size() );
   }
 

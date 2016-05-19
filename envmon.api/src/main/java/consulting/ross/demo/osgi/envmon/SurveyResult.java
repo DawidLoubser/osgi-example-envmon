@@ -58,4 +58,15 @@ public class SurveyResult
   {
     return measurements;
   }
+
+  @Override
+  public String toString()
+  {
+    return "SurveyResult{" +
+      "alarmWasRaised=" + alarmWasRaised +
+      ", measuredAverage=" + measuredAverage +
+      ", maxAllowed=" + maxAllowed +
+      ", measurements=" + measurements +
+      '}';
+  }
 }

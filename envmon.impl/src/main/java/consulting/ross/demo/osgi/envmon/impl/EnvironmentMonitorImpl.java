@@ -8,7 +8,7 @@ import consulting.ross.demo.osgi.envmon.*;
  */
 public class EnvironmentMonitorImpl implements EnvironmentMonitor
 {
-  double maxTemperature = 30.0; 
+  Double maxTemperature = 30.0; 
   volatile Sensor sensor;
   volatile Alarm alarm;
   
@@ -16,24 +16,47 @@ public class EnvironmentMonitorImpl implements EnvironmentMonitor
   @Override
   public SurveyResult performSurvey()
   {
-    return null;
+    // Check technical requirements (system error if not met)
+    if (sensor == null) 
+      throw new RuntimeException("Not connected to a Sensor");
+    if (alarm == null)
+      throw new RuntimeException("Not connected to an alarm");
+
+    SurveyResult r = new SurveyResult();
+    r.setMaxAllowed( maxTemperature );
+    
+    Double measuredAvg = sensor.measureTemperature();
+    r.getMeasurements().put("sensor", measuredAvg);
+    r.setMeasuredAverage( measuredAvg );
+    
+    if (measuredAvg > maxTemperature) 
+    {
+      alarm.activate();
+      r.setAlarmWasRaised( true );
+    }
+    else 
+    {
+      r.setAlarmWasRaised( false );
+    }
+    
+    return r;
   }
 
   @Override
   public void startMonitoring()
   {
-
+    // TODO: Implement
   }
 
   @Override
   public void stopMonitoring()
   {
-
+    // TODO: Implement
   }
 
   @Override
   public void resetAlarms()
   {
-
+    // TODO: Implement
   }
 }
