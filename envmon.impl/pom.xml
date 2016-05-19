@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <parent>
+    <groupId>consulting.ross.demo.osgi</groupId>
+    <artifactId>osgi-demo</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>envmon.impl</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+  
+  <name>Environment Monitor (Simple implementation)</name>
+  <description>
+    A simple implementation of an EnvironmentMonitor,
+    which makes use of injected Sensor and Alarm components.
+  </description>
+
+  <dependencies>
+    <!-- We implement this API -->
+    <dependency>
+      <groupId>consulting.ross.demo.osgi</groupId>
+      <artifactId>envmon.api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Built test-driven -->
+    <dependency>
+      <groupId>org.jmock</groupId>
+      <artifactId>jmock-junit4</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+</project>

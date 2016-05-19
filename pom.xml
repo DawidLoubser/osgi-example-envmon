@@ -9,8 +9,30 @@
 
   <modules>
     <module>envmon.api</module>
+    <module>envmon.impl</module>
   </modules>
 
+  <!-- Standardise dependencies across sub-projects -->
+  <dependencyManagement>
+    <dependencies>
+      <!-- Our environment monitoring API -->
+      <dependency>
+        <groupId>consulting.ross.demo.osgi</groupId>
+        <artifactId>envmon.api</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+
+      <!-- Unit testing (with mocking) -->
+      <dependency>
+        <groupId>org.jmock</groupId>
+        <artifactId>jmock-junit4</artifactId>
+        <version>2.5.1</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  
+  
   <!-- Standardise config across sub-projects -->
   <build>
     <pluginManagement>
