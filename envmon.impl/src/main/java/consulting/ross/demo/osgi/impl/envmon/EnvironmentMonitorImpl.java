@@ -1,4 +1,4 @@
-package consulting.ross.demo.osgi.envmon.impl;
+package consulting.ross.demo.osgi.impl.envmon;
 
 import consulting.ross.demo.osgi.envmon.*;
 

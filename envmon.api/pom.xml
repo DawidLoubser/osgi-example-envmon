@@ -22,6 +22,13 @@
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
+        <configuration>
+          <instructions>
+            <Export-Package>
+              consulting.ross.demo.osgi.envmon; version=1.0.0
+            </Export-Package>
+          </instructions>
+        </configuration>
       </plugin>    
     </plugins>
   </build>
