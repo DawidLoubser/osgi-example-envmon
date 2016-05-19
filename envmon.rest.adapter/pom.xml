@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <parent>
+    <groupId>consulting.ross.demo.osgi</groupId>
+    <artifactId>osgi-demo</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>envmon.rest.adapter</artifactId>
+  <version>1.0.0</version>
+  <packaging>bundle</packaging>
+  
+  <name>Environment Monitor (REST adapter)</name>
+  <description>
+    Adapts any EnvironmentMonitor as an HTTP
+    REST service (requires a DOSGi implementation in the
+    environment, such as CXF-DOSGi)
+  </description>
+
+  <dependencies>
+    <!-- We implement this API -->
+    <dependency>
+      <groupId>consulting.ross.demo.osgi</groupId>
+      <artifactId>envmon.api.rest</artifactId>
+      <version>1.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>consulting.ross.demo.osgi</groupId>
+      <artifactId>envmon.api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Felix DM for service management -->
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.dependencymanager.lambda</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <configuration>
+          <instructions>
+            <!-- For careful versioning control, we are explicit
+                 about our relationship to imported packages. -->
+            <Import-Package>
+              consulting.ross.demo.osgi.rest.envmon; provide:=true,
+              consulting.ross.demo.osgi.envmon; provide:=true,
+              org.apache.felix.dm; provide:=false,
+              org.apache.felix.dm.lambda; provide:=false,
+            </Import-Package>
+            <Bundle-Activator>
+              consulting.ross.demo.osgi.adapter.rest.envmon.Activator
+            </Bundle-Activator>
+            <Karaf-Commands>*</Karaf-Commands>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>
