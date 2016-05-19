@@ -29,6 +29,14 @@
         <version>2.5.1</version>
         <scope>test</scope>
       </dependency>
+      
+      <!-- OSGi infrastructure -->
+      <dependency>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>org.apache.felix.dependencymanager.lambda</artifactId>
+        <version>1.0.0</version>
+        <scope>provided</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   

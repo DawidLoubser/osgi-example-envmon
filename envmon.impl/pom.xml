@@ -8,7 +8,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>envmon.impl</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <packaging>bundle</packaging>
   
   <name>Environment Monitor (Simple implementation)</name>
@@ -22,6 +22,12 @@
     <dependency>
       <groupId>consulting.ross.demo.osgi</groupId>
       <artifactId>envmon.api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Felix DM for service management -->
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.dependencymanager.lambda</artifactId>
       <scope>provided</scope>
     </dependency>
     <!-- Built test-driven -->
@@ -39,10 +45,31 @@
         <artifactId>maven-bundle-plugin</artifactId>
         <configuration>
           <instructions>
-            <!-- We are a provider (implementor) -->
+            <!-- We are now importing multiple things (incl
+                 Felix DM. We are a "provider" of envmon,
+                 but a "consumer" of Felix DM - with different
+                 Semver version ranges.
+                 
+                 One strategy is the following - where we re-export the
+                 environment monitor API (which now also gets bundled
+                 with this package:)
+             -->
+            <!--<Export-Package>-->
+              <!--consulting.ross.demo.osgi.envmon; provide:=true-->
+            <!--</Export-Package>-->
+            
+            <!-- An alternative strategy is to carefully-control
+                 all package imports - better, but more tedious: -->
             <Import-Package>
-              consulting.ross.demo.osgi.envmon; provide:=true
+              consulting.ross.demo.osgi.envmon; provide:=true;
+              org.apache.felix.dm; provide:=false;
+              org.apache.felix.dm.lambda; provide:=false;
             </Import-Package>
+            
+            <!-- This sets up the service publishing / wiring -->
+            <Bundle-Activator>
+              consulting.ross.demo.osgi.impl.envmon.EnvironmentMonitorActivator
+            </Bundle-Activator>
           </instructions>
         </configuration>
       </plugin>
