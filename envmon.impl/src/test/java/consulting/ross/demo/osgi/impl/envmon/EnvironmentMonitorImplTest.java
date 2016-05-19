@@ -79,6 +79,27 @@ public class EnvironmentMonitorImplTest
     assertEquals( 20.0, result.getMaxAllowed(), PREC );
     assertEquals( 1,  result.getMeasurements().size() );
   }
+  
+  
+  @Test
+  public void resetAlarms_1present_noFail()
+  {
+    final Mockery m = new Mockery();
+    final Alarm alarm = m.mock(Alarm.class);
+
+    // Configure our test subject for this scenario
+    EnvironmentMonitorImpl em = new EnvironmentMonitorImpl();
+    em.alarm = alarm;
+
+    // Our expectations
+    m.checking( new Expectations(){{
+
+      oneOf(alarm).deActivate();
+    }});
+
+    em.resetAlarms();
+    m.assertIsSatisfied();
+  }
 
   
   private static final double PREC = 0.00001;

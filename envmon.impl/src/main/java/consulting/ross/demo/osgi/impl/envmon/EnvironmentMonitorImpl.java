@@ -2,12 +2,20 @@ package consulting.ross.demo.osgi.impl.envmon;
 
 import consulting.ross.demo.osgi.envmon.*;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import static java.util.concurrent.TimeUnit.*;
+import java.util.logging.Logger;
+
 /**
  * A deliberately-simplistic implementation, with
  * one sensor / alarm only.
  */
 public class EnvironmentMonitorImpl implements EnvironmentMonitor
 {
+  private static Logger logger = Logger.getLogger(EnvironmentMonitorImpl.class.getName());
+  ScheduledExecutorService es;
+  Long pollDelayMs = 2000L;
   Double maxTemperature = 30.0; 
   volatile Sensor sensor;
   volatile Alarm alarm;
@@ -39,24 +47,49 @@ public class EnvironmentMonitorImpl implements EnvironmentMonitor
       r.setAlarmWasRaised( false );
     }
     
+    logger.info("Completed environment survey: " + r);
     return r;
   }
 
   @Override
   public void startMonitoring()
   {
-    // TODO: Implement
+    if (es == null)
+    {
+      es = Executors.newScheduledThreadPool(2);
+      logger.info("Scheduling survey for every " 
+        + pollDelayMs + "ms");
+      
+      es.scheduleWithFixedDelay( () ->
+          performSurvey(),
+        0, pollDelayMs, MILLISECONDS);
+    }
+    else
+    {
+      // This is an idempotent service
+      logger.warning("Auto-monitoring already started (every " 
+        + pollDelayMs + "ms)");
+    }
   }
 
   @Override
   public void stopMonitoring()
   {
-    // TODO: Implement
+    // This is an idempotent service
+    if (es == null || es.isShutdown())
+    {
+      logger.warning("Auto-monitoring already stopped");
+      return;
+    }
+    es.shutdownNow();
+    es = null;
+    resetAlarms();
   }
 
   @Override
   public void resetAlarms()
   {
-    // TODO: Implement
+    if (alarm != null)
+      alarm.deActivate();
   }
 }
