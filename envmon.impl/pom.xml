@@ -8,7 +8,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>envmon.impl</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <packaging>bundle</packaging>
   
   <name>Environment Monitor (Simple implementation)</name>
@@ -28,6 +28,12 @@
     <dependency>
       <groupId>org.apache.felix</groupId>
       <artifactId>org.apache.felix.dependencymanager.lambda</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Custom console command (Karaf shell) -->
+    <dependency>
+      <groupId>org.apache.karaf.shell</groupId>
+      <artifactId>org.apache.karaf.shell.console</artifactId>
       <scope>provided</scope>
     </dependency>
     <!-- Built test-driven -->
@@ -64,12 +70,17 @@
               consulting.ross.demo.osgi.envmon; provide:=true,
               org.apache.felix.dm; provide:=false,
               org.apache.felix.dm.lambda; provide:=false,
+              org.apache.karaf.shell.api.action; provide:=false,
+              org.apache.karaf.shell.api.console; provide:=false,
+              org.apache.karaf.shell.support.completers; provide:=false,
+              org.apache.karaf.shell.api.action.lifecycle; provide:=false
             </Import-Package>
             
             <!-- This sets up the service publishing / wiring -->
             <Bundle-Activator>
               consulting.ross.demo.osgi.impl.envmon.EnvironmentMonitorActivator
             </Bundle-Activator>
+            <Karaf-Commands>*</Karaf-Commands>
           </instructions>
         </configuration>
       </plugin>
