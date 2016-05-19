@@ -61,9 +61,9 @@
             <!-- An alternative strategy is to carefully-control
                  all package imports - better, but more tedious: -->
             <Import-Package>
-              consulting.ross.demo.osgi.envmon; provide:=true;
-              org.apache.felix.dm; provide:=false;
-              org.apache.felix.dm.lambda; provide:=false;
+              consulting.ross.demo.osgi.envmon; provide:=true,
+              org.apache.felix.dm; provide:=false,
+              org.apache.felix.dm.lambda; provide:=false,
             </Import-Package>
             
             <!-- This sets up the service publishing / wiring -->
