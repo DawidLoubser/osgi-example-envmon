@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <parent>
+    <groupId>consulting.ross.demo.osgi</groupId>
+    <artifactId>osgi-demo</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>sensor.basic</artifactId>
+  <version>1.0.0</version>
+  <packaging>bundle</packaging>
+  
+  <name>Sensor (Simple implementation)</name>
+  <description>
+    The most basic possible implementation of a sensor.
+  </description>
+
+  <dependencies>
+    <!-- We implement this API -->
+    <dependency>
+      <groupId>consulting.ross.demo.osgi</groupId>
+      <artifactId>envmon.api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Felix DM for service management -->
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.dependencymanager.lambda</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <configuration>
+          <instructions>
+            <!-- For careful versioning control, we are explicit
+                 about our relationship to imported packages. -->
+            <Import-Package>
+              consulting.ross.demo.osgi.envmon; provide:=true,
+              org.apache.felix.dm; provide:=false,
+              org.apache.felix.dm.lambda; provide:=false,
+            </Import-Package>
+            <Bundle-Activator>
+              consulting.ross.demo.osgi.impl.sensor.BasicSensorActivator
+            </Bundle-Activator>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>
