@@ -12,6 +12,7 @@
     <module>envmon.impl</module>
     <module>alarm.basic</module>
     <module>sensor.basic</module>
+    <module>envmon.api.rest</module>
   </modules>
 
   <!-- Standardise dependencies across sub-projects -->
