@@ -1,0 +1,32 @@
+<features
+    name="osgi-demo-features"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://karaf.apache.org/xmlns/features/v1.3.0"
+    xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0
+    http://karaf.apache.org/xmlns/features/v1.3.0">
+
+    <!-- Additional repositories from which bundles are loaded -->
+    <repository>mvn:org.apache.cxf.dosgi/cxf-dosgi/1.7.0/xml/features</repository>
+
+    <feature
+        name="osgi-demo-baseline-env"
+        version="1.0.0"
+        description="Platform features we'd like"
+        install="auto">
+
+        <!-- Web Services (SOAP + REST) support -->
+        <feature version="[1.7.0,2)">cxf-dosgi-discovery-distributed</feature>
+
+        <!-- Felix dependency manager -->
+        <bundle start="true" start-level="10">
+          mvn:org.apache.felix/org.apache.felix.dependencymanager/4.3.0
+        </bundle>
+        <bundle start="true" start-level="10">
+          mvn:org.apache.felix/org.apache.felix.dependencymanager.lambda/1.0.0
+        </bundle>
+        <bundle start="true" start-level="10">
+          mvn:org.apache.felix/org.apache.felix.dependencymanager.shell/4.0.4
+        </bundle>
+    </feature>
+
+</features>
